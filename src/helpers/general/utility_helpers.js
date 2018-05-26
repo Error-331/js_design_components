@@ -8,7 +8,7 @@ const { is, isEmpty, complement } = require('ramda');
 // local imports
 
 // helpers implementation
-const isCanBeEmpty = (value /*: ?any */)/*: boolean */ => {
+const isCanBeEmpty = (value: ?any): boolean => {
     if (isNullOrUndefined(value)) {
         return false;
     } else if (is(Array, value) || is(Object, value) || is(String, value)) {
@@ -18,19 +18,19 @@ const isCanBeEmpty = (value /*: ?any */)/*: boolean */ => {
     }
 };
 
-const isNullOrUndefined = (value /*: ?mixed */)/*: boolean */ => {
+const isNullOrUndefined = (value: ?mixed): boolean  => {
     return value === null || value === undefined;
 };
 
-const isNotNullOrUndefined = (value /*: ?mixed */)/*: boolean */ => {
+const isNotNullOrUndefined = (value: ?mixed): boolean  => {
     return value !== null && value !== undefined;
 };
 
-const isNotNil = (value /*: mixed */)/*: boolean %checks */ => {
+const isNotNil = (value: mixed): boolean %checks => {
     return value !== undefined && value !== null;
 };
 
-const isNotEmpty = (value /*: ?Array<any> | Object | string */)/*: boolean */ => {
+const isNotEmpty = (value: ?Array<any> | Object | string): boolean => {
     return complement(isEmpty)(value);
 };
 
