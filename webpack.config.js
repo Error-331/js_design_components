@@ -13,7 +13,8 @@ module.exports = {
 
     output: {
         filename: 'bundle.js',
-        path: resolve('./', '.dist')
+        path: resolve('./', '.dist'),
+        libraryTarget: 'commonjs2'
     },
 
     resolve: {
