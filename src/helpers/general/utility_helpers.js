@@ -3,7 +3,7 @@
 // @flow
 
 // external imports
-const { is, isEmpty, complement } = require('ramda');
+import { is, isEmpty, complement } from 'ramda';
 
 // local imports
 

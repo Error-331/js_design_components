@@ -1,18 +1,28 @@
+'use strict';
+
+// external imports
 const { resolve } = require('path');
 
+// local imports
+
+// exports
 module.exports = {
     target: 'web',
-
-    resolve: {
-        modules: [],
-        extensions: ['.js', '.jsx', '.json']
-    },
 
     entry: './index.js',
 
     output: {
         filename: 'bundle.js',
         path: resolve('./', '.dist')
+    },
+
+    resolve: {
+        extensions: ['.js', '.jsx', '.json'],
+        modules: ['node_modules']
+    },
+
+    externals: {
+        ramda: 'ramda'
     },
 
     module: {

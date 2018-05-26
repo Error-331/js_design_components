@@ -3,4 +3,4 @@
 # TODO
 - Add more Flow types;
 - Add normal compilable Flow with type file;
-- Add eslint;
+- Normalize eslint;

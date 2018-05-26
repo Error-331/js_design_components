@@ -11,7 +11,7 @@
     "webfuturistics"
   ],
   "homepage": "https://github.com/owner/project#readme",
-  "main": "index.js",
+  "main": "./.dist/bundle.js",
   "engines": {
     "node": ">=8.11.2"
   },
@@ -29,7 +29,8 @@
     "url": "https://github.com/WebFuturistics/js_design_components.git"
   },
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+  },
   "peerDependencies": {
     "ramda": ">=0.25.0"
   },
