@@ -22,7 +22,12 @@ module.exports = {
     },
 
     externals: {
-        ramda: 'ramda'
+        ramda: {
+            commonjs: 'ramda',
+            commonjs2: 'ramda',
+            amd: '_',
+            root: '_'
+        }
     },
 
     module: {
