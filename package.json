@@ -1,0 +1,40 @@
+{
+  "name": "@webfuturistics/design_components",
+  "version": "0.0.1",
+  "description": "Package that holds common use helper functions and other resources which are frequently used in many nodejs/frontend projects",
+  "keywords": ["design", "components", "functions", "helpers", "resources", "webfuturistics"],
+  "homepage": "https://github.com/owner/project#readme",
+  "main": "index.js",
+  "engines" : {
+    "node" : ">=8.11.2"
+  },
+
+  "scripts": {
+    "install flow-types": "flow-typed install ramda@0"
+  },
+
+  "author": {
+    "name" : "Sergei Selihov",
+    "email" : "red331@mail.ru",
+    "url" : "https://github.com/Error-331"
+  },
+
+  "repository":
+  {
+    "type" : "git",
+    "url" : "https://github.com/WebFuturistics/js_design_components.git"
+  },
+
+  "license": "MIT",
+  "dependencies": {
+  },
+
+  "peerDependencies": {
+    "ramda": ">=0.25.0"
+  },
+
+  "devDependencies": {
+    "flow-bin": "0.73.0",
+    "flow-typed": ">=2.4.0"
+  }
+}
