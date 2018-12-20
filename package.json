@@ -32,7 +32,8 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "ramda": ">=0.25.0"
+    "ramda": "0.25.0",
+    "immutable": "3.8.2"
   },
   "devDependencies": {
     "util-fns": "^0.1.3",
