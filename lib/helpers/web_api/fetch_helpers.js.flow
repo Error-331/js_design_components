@@ -3,27 +3,16 @@
 // @flow
 
 // external imports
-import {reduce, curry, is} from 'ramda';
+import {is, isNil, defaultTo, reduce, curry} from 'ramda';
 
 // internal imports
 import type {RequestHeaderType, RequestHeadersType} from './../../types/request_response';
 import type {WFFetchReturnType} from './../../types/web_futuristics';
 
+import {getValue} from './../../registers/general_register'
+
 import type {PromiseResolveCallback, PromiseRejectCallback} from './../../types/promise';
-
 import {isHapiBoomError, makeHapiBoomError} from './../hapi/request_response';
-
-/*
-    if (isAuth) {
-        const authenticationToken = authenticationTokenSelector(store.getState());
-        requestHeaders.append('Authorization', authenticationToken);
-    }
-
-    ${frontendConfig[endpointName]}
-
-
- */
-
 
 // types definition
 
@@ -39,7 +28,6 @@ const prepareHeaders = (headersArray:  RequestHeadersType = []): Headers => {
 
 export const sendRequest = (
     method: string,
-    endpointName: string,
     mode: 'cors' | 'no-cors',
     path: string,
     headers: RequestHeadersType,
@@ -52,8 +40,11 @@ export const sendRequest = (
         body: is(Object, body) ? JSON.stringify(body) : body
     };
 
-    const fetchRequest: Request = new Request(path, requestInitData);
+    let apiEndpoint: string = getValue('apiEndpoint');
+    apiEndpoint = defaultTo('')(apiEndpoint);
 
+    const fetchRequest: Request = new Request(`${apiEndpoint}${path}`, requestInitData);
+console.log(apiEndpoint);
     return new Promise((resolve: PromiseResolveCallback, reject: PromiseRejectCallback) => {
         fetch(fetchRequest)
             .then((response: Response) => {
@@ -78,19 +69,27 @@ export const sendRequest = (
 
 export const sendRequestToHapi = (
     method: string,
-    endpointName: string,
     mode: 'cors' | 'no-cors',
     path: string,
     headers: RequestHeadersType,
     body: any
 ): WFFetchReturnType => {
+    console.log('ggg1');
     return new Promise((resolve: PromiseResolveCallback, reject: PromiseRejectCallback) => {
-        sendRequest(method, endpointName, mode, path, headers, body)
+        sendRequest(method, mode, path, headers, body)
             .then(({response, data}) => isHapiBoomError(response.status, data) ? reject(data) : resolve({response, data}))
             .catch(error => reject(makeHapiBoomError(error)))
     });
 };
 
-export const sendGetRequestToAPI = curry(sendRequest)('GET', 'apiEndpoint', 'cors');
-export const sendPostRequestToAPI = curry(sendRequest)('POST', 'apiEndpoint', 'cors');
-export const sendPostRequestToAPINoAuth = curry(sendRequest)('POST', 'apiEndpoint', 'cors');
+export const sendGetRequestToAPI = curry(sendRequest)('GET', 'no-cors');
+export const sendPostRequestToAPI = curry(sendRequest)('POST', 'no-cors');
+
+export const sendGetRequestToAPICors = curry(sendRequest)('GET', 'cors');
+export const sendPostRequestToAPICors = curry(sendRequest)('POST', 'cors');
+
+export const sendGetRequestToHapiAPI = curry(sendRequestToHapi)('GET', 'no-cors');
+export const sendPostRequestToHapiAPI = curry(sendRequestToHapi)('POST', 'no-cors');
+
+export const sendGetRequestToHapiAPICors = curry(sendRequestToHapi)('GET', 'cors');
+export const sendPostRequestToHapiAPICors = curry(sendRequestToHapi)('POST', 'cors');
