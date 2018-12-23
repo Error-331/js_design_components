@@ -14,12 +14,12 @@ export const getLocalStorageObject = (): Storage => {
     return window.localStorage;
 };
 
-export const removeLocalStorageKey = (keyName: string): string => {
+export const removeLocalStorageKey = (keyName: string): ?string => {
     const localStorage: Storage = getLocalStorageObject();
     return localStorage.removeItem(keyName);
 };
 
-export const getLocalStorageKey = (keyName: string): string => {
+export const getLocalStorageKey = (keyName: string): ?string => {
     const localStorage: Storage = getLocalStorageObject();
     return localStorage.getItem(keyName);
 };

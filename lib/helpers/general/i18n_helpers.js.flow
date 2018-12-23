@@ -6,6 +6,7 @@ const {keys, reduce} = require('ramda');
 // local imports
 
 // helpers implementation
+// TODO: types
 export const formatMessages = (formatMessageFunc, messagesObject) => {
     const messageKeys = keys(messagesObject);
 

@@ -7,6 +7,7 @@ import {map, values, pickAll} from 'ramda';
 import {Map} from 'immutable';
 
 // selectors implementation
+// TODO: TYPES!
 export const convertCollectionItemsToArray = (itemsMap: Map): Array<any> => {
     const itemsArray: Array<any> = itemsMap.toArray();
 
