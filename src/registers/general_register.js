@@ -17,6 +17,8 @@ type NewMapType = {[string]: any};
  *
  * apiEndpoint: string - used when sending requests to server
  *
+ * authenticationReducerName: string
+ *
  */
 
 let registerInstance: Map<string, any> = Map();

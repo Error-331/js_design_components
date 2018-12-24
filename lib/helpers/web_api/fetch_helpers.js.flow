@@ -3,7 +3,7 @@
 // @flow
 
 // external imports
-import {is, isNil, defaultTo, reduce, curry} from 'ramda';
+import {is, defaultTo, reduce, curry} from 'ramda';
 
 // internal imports
 import type {RequestHeaderType, RequestHeadersType} from './../../types/request_response';
@@ -44,7 +44,7 @@ export const sendRequest = (
     apiEndpoint = defaultTo('')(apiEndpoint);
 
     const fetchRequest: Request = new Request(`${apiEndpoint}${path}`, requestInitData);
-console.log(apiEndpoint);
+
     return new Promise((resolve: PromiseResolveCallback, reject: PromiseRejectCallback) => {
         fetch(fetchRequest)
             .then((response: Response) => {
@@ -74,7 +74,6 @@ export const sendRequestToHapi = (
     headers: RequestHeadersType,
     body: any
 ): WFFetchReturnType => {
-    console.log('ggg1');
     return new Promise((resolve: PromiseResolveCallback, reject: PromiseRejectCallback) => {
         sendRequest(method, mode, path, headers, body)
             .then(({response, data}) => isHapiBoomError(response.status, data) ? reject(data) : resolve({response, data}))
