@@ -7,5 +7,5 @@
 // internal imports
 
 // types definition
-export type PromiseResolveCallback = (data: any) => void;
-export type PromiseRejectCallback = (data: any) => void;
+export type PromiseResolveCallbackType = (data: any) => void;
+export type PromiseRejectCallbackType = (data: any) => void;

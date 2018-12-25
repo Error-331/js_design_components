@@ -11,7 +11,7 @@ import type {WFFetchReturnType} from './../../types/web_futuristics';
 
 import {getValue} from './../../registers/general_register'
 
-import type {PromiseResolveCallback, PromiseRejectCallback} from './../../types/promise';
+import type {PromiseResolveCallbackType, PromiseRejectCallbackType} from './../../types/promise';
 import {isHapiBoomError, makeHapiBoomError} from './../hapi/request_response_helpers';
 
 // types definition
@@ -45,7 +45,7 @@ export const sendRequest = (
 
     const fetchRequest: Request = new Request(`${apiEndpoint}${path}`, requestInitData);
 
-    return new Promise((resolve: PromiseResolveCallback, reject: PromiseRejectCallback) => {
+    return new Promise((resolve: PromiseResolveCallbackType, reject: PromiseRejectCallbackType) => {
         fetch(fetchRequest)
             .then((response: Response) => {
                 if (!response.headers.has('content-type')) {
@@ -74,21 +74,21 @@ export const sendRequestToHapi = (
     headers: RequestHeadersType,
     body: any
 ): WFFetchReturnType => {
-    return new Promise((resolve: PromiseResolveCallback, reject: PromiseRejectCallback) => {
+    return new Promise((resolve: PromiseResolveCallbackType, reject: PromiseRejectCallbackType) => {
         sendRequest(method, mode, path, headers, body)
             .then(({response, data}) => isHapiBoomError(response.status, data) ? reject(data) : resolve({response, data}))
             .catch(error => reject(makeHapiBoomError(error)))
     });
 };
 
-export const sendGetRequestToAPI = curry(sendRequest)('GET', 'no-cors');
-export const sendPostRequestToAPI = curry(sendRequest)('POST', 'no-cors');
+export const sendGetRequestToAPI: curry<string, RequestHeadersType, any> = curry(sendRequest)('GET', 'no-cors');
+export const sendPostRequestToAPI: curry<string, RequestHeadersType, any> = curry(sendRequest)('POST', 'no-cors');
 
-export const sendGetRequestToAPICors = curry(sendRequest)('GET', 'cors');
-export const sendPostRequestToAPICors = curry(sendRequest)('POST', 'cors');
+export const sendGetRequestToAPICors: curry<string, RequestHeadersType, any> = curry(sendRequest)('GET', 'cors');
+export const sendPostRequestToAPICors: curry<string, RequestHeadersType, any> = curry(sendRequest)('POST', 'cors');
 
-export const sendGetRequestToHapiAPI = curry(sendRequestToHapi)('GET', 'no-cors');
-export const sendPostRequestToHapiAPI = curry(sendRequestToHapi)('POST', 'no-cors');
+export const sendGetRequestToHapiAPI: curry<string, RequestHeadersType, any> = curry(sendRequestToHapi)('GET', 'no-cors');
+export const sendPostRequestToHapiAPI: curry<string, RequestHeadersType, any> = curry(sendRequestToHapi)('POST', 'no-cors');
 
-export const sendGetRequestToHapiAPICors = curry(sendRequestToHapi)('GET', 'cors');
-export const sendPostRequestToHapiAPICors = curry(sendRequestToHapi)('POST', 'cors');
+export const sendGetRequestToHapiAPICors: curry<string, RequestHeadersType, any> = curry(sendRequestToHapi)('GET', 'cors');
+export const sendPostRequestToHapiAPICors: curry<string, RequestHeadersType, any> = curry(sendRequestToHapi)('POST', 'cors');
