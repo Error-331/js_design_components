@@ -12,7 +12,7 @@ import type {WFFetchReturnType} from './../../types/web_futuristics';
 import {getValue} from './../../registers/general_register'
 
 import type {PromiseResolveCallback, PromiseRejectCallback} from './../../types/promise';
-import {isHapiBoomError, makeHapiBoomError} from './../hapi/request_response';
+import {isHapiBoomError, makeHapiBoomError} from './../hapi/request_response_helpers';
 
 // types definition
 
