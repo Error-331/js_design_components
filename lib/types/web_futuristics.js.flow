@@ -8,4 +8,5 @@
 import type {JSONDataType} from './general';
 
 // types definition
-export type WFFetchReturnType = Promise<{response: Response, data?: JSONDataType}>;
+export type WFResponseType = {response: Response, data?: JSONDataType};
+export type WFFetchReturnType = Promise<WFResponseType>;

@@ -17,7 +17,10 @@ type NewMapType = {[string]: any};
  *
  * apiEndpoint: string - used when sending requests to server
  *
- * authenticationReducerName: string
+ * authenticationReducerName: string - key for authentication reducer
+ *
+ * entityCollectionItemsCountFieldName: string - new name for 'itemsCount' field of entity collection meta
+ * entityCollectionTotalItemCountFieldName: string - new name for 'totalItemCount' field of entity collection meta
  *
  */
 

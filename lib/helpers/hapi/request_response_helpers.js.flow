@@ -7,6 +7,7 @@ import {isNil, is, where} from 'ramda';
 
 // internal imports
 import type {JSONDataType} from './../../types/general';
+import type {HapiErrorType} from './../../types/request_response';
 
 // functions implementation
 export const isHapiBoomError = (responseStatus: number, jsonData?: JSONDataType): boolean => {
@@ -18,7 +19,7 @@ export const isHapiBoomError = (responseStatus: number, jsonData?: JSONDataType)
     return responseStatus >= 400 && testFunc(jsonData);
 };
 
-export const makeHapiBoomError = (error: Error): {statusCode: number, error: string, message: string} => {
+export const makeHapiBoomError = (error: Error): HapiErrorType => {
     return {
         statusCode: 500,
         error: 'Bad Request',
