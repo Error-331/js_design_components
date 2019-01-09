@@ -3,13 +3,13 @@
 // @flow
 
 // external imports
-import {is, defaultTo, reduce, curry} from 'ramda';
+import {is, defaultTo, keys, reduce, curry} from 'ramda';
 
 // internal imports
 import type {RequestHeaderType, RequestHeadersType} from './../../types/request_response';
 import type {WFFetchReturnType} from './../../types/web_futuristics';
 
-import {getValue} from './../../registers/general_register'
+import {getValue} from './../../registers/general_register';
 
 import type {PromiseResolveCallbackType, PromiseRejectCallbackType} from './../../types/promise';
 import {isHapiBoomError, makeHapiBoomError} from './../hapi/request_response_helpers';
@@ -17,11 +17,13 @@ import {isHapiBoomError, makeHapiBoomError} from './../hapi/request_response_hel
 // types definition
 
 // functions implementation
-const prepareHeaders = (headersArray:  RequestHeadersType = []): Headers => {
+const prepareHeaders = (headersArray: RequestHeadersType = []): Headers => {
     const requestHeaders: Headers = new Headers();
 
-    return reduce((requestHeaders: Headers, {headerName, headerValue}: RequestHeaderType) => {
-        requestHeaders.append(headerName, headerValue);
+    return reduce((requestHeaders: Headers, requestHeader: RequestHeaderType) => {
+        const headerName: string = keys(requestHeader)[0];
+
+        requestHeaders.append(headerName, requestHeader[headerName]);
         return requestHeaders;
     }, requestHeaders, headersArray);
 };
@@ -77,7 +79,7 @@ export const sendRequestToHapi = (
     return new Promise((resolve: PromiseResolveCallbackType, reject: PromiseRejectCallbackType) => {
         sendRequest(method, mode, path, headers, body)
             .then(({response, data}) => isHapiBoomError(response.status, data) ? reject(data) : resolve({response, data}))
-            .catch(error => reject(makeHapiBoomError(error)))
+            .catch(error => reject(makeHapiBoomError(error)));
     });
 };
 
